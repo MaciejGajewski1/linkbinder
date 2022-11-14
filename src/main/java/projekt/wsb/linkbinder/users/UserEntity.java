@@ -1,4 +1,4 @@
-package projekt.wsb.linkbinder.controllers.users;
+package projekt.wsb.linkbinder.users;
 
 import lombok.*;
 
