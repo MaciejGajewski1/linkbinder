@@ -28,14 +28,13 @@ class UserServiceImpl implements UserService {
             return "register_form";
         }
 
-        UserDto newUser = model.getAttribute("user") instanceof UserDto ? (UserDto) model.getAttribute("user") : null;
+        UserDto newUser = (UserDto) model.getAttribute("user");
 
         if(userRepository.findById(newUser.getUsername()).isPresent()) {
             return "redirect:/register_dissapprove";
         }
 
-        if(newUser != null)
-            userRepository.save(UserEntity.fromDto(newUser));
+        userRepository.save(UserEntity.fromDto(newUser));
 
         return "redirect:/register_approve";
     }
