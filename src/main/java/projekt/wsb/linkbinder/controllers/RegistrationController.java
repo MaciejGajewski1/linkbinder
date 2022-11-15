@@ -27,6 +27,16 @@ class RegistrationController implements WebMvcConfigurer {
         registry.addViewController("/register_dissapprove").setViewName("register_dissapprove");
     }
 
+    @GetMapping("/")
+    String startUp(Model model) {
+        return userService.initModel(model);
+    }
+
+    @PostMapping("/login")
+    String logUser(@ModelAttribute("user") UserDto user, Model model) {
+        return userService.logUser(user, model);
+    }
+
     @GetMapping("/redirectToSignUpPage")
     String showForm(Model model) {
         return userService.beginRegistration(model);
@@ -43,8 +53,8 @@ class RegistrationController implements WebMvcConfigurer {
     }
 
     @GetMapping("/redirectToHomePage")
-    String showHomePage() {
-        return "index";
+    String showHomePage(Model model) {
+        return userService.returnToHomePage(model);
     }
 
 }

@@ -8,6 +8,8 @@ import projekt.wsb.linkbinder.repositories.UserRepository;
 import projekt.wsb.linkbinder.users.UserDto;
 import projekt.wsb.linkbinder.users.UserEntity;
 
+import java.util.Optional;
+
 @Service
 class UserServiceImpl implements UserService {
 
@@ -15,9 +17,32 @@ class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
+    public String initModel(Model model) {
+        model.addAttribute("user", new UserDto());
+        return "index";
+    }
+
+    @Override
+    public String logUser(UserDto user, Model model) {
+
+        final Optional<UserEntity> optionalUser = userRepository.findById(user.getUsername());
+
+        if (optionalUser.isPresent()) {
+            UserEntity dbUser = optionalUser.get();
+            if (dbUser.getPassword().equals(user.getPassword())) {
+                return "logged_user";
+            }
+            else
+                return "wrong_password";
+        }
+        else
+            return "wrong_username";
+
+    }
+
+    @Override
     public String beginRegistration(Model model) {
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
+        model.addAttribute("user", new UserDto());
         return "register_form";
     }
 
@@ -37,5 +62,11 @@ class UserServiceImpl implements UserService {
         userRepository.save(UserEntity.fromDto(newUser));
 
         return "redirect:/register_approve";
+    }
+
+    @Override
+    public String returnToHomePage(Model model) {
+        model.addAttribute("user", new UserDto());
+        return "index";
     }
 }

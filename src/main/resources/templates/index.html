@@ -30,14 +30,14 @@
 			      			<h3 class="mb-4">Sign In</h3>
 			      		</div>
 			      	</div>
-							<form action="#" class="signin-form">
+							<form action="#" th:action="@{/login}" th:object="${user}" method="post" class="signin-form">
 			      				<div class="form-group mt-3">
-			      					<input type="text" class="form-control1">
+			      					<input type="text" th:field="*{username}" class="form-control1">
 			      					<label class="form-control-placeholder1">Username</label>
 									<br>
 			      				</div>
 		            			<div class="form-group">
-		              				<input id="password-field" type="password" class="form-control1">
+		              				<input type="password" th:field="*{password}" class="form-control1">
 		              				<label class="form-control-placeholder1">Password</label>
 		              				<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 		            			</div>
