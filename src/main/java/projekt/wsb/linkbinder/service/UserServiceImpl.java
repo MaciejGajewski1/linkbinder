@@ -30,6 +30,7 @@ class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             UserEntity dbUser = optionalUser.get();
             if (dbUser.getPassword().equals(user.getPassword())) {
+                model.addAttribute("user", dbUser.toDto());
                 return "logged_user";
             }
             else
