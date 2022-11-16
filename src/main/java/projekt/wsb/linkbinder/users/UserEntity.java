@@ -1,12 +1,14 @@
 package projekt.wsb.linkbinder.users;
 
 import lombok.*;
+import projekt.wsb.linkbinder.tables.TableEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -33,6 +35,9 @@ public class UserEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<TableEntity> tables;
+
     public static UserEntity fromDto(UserDto userDto) {
         return new UserEntity(
                 userDto.getUsername(),
@@ -40,7 +45,8 @@ public class UserEntity {
                 userDto.getFirstname(),
                 userDto.getLastname(),
                 userDto.getAge(),
-                userDto.getEmail()
+                userDto.getEmail(),
+                new HashSet<>()
         );
     }
 
