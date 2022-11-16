@@ -4,17 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import projekt.wsb.linkbinder.repositories.TableRepository;
 import projekt.wsb.linkbinder.repositories.UserRepository;
+import projekt.wsb.linkbinder.tables.TableDto;
 import projekt.wsb.linkbinder.users.UserDto;
 import projekt.wsb.linkbinder.users.UserEntity;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TableRepository tableRepository;
 
     @Override
     public String initModel(Model model) {
@@ -31,6 +38,10 @@ class UserServiceImpl implements UserService {
             UserEntity dbUser = optionalUser.get();
             if (dbUser.getPassword().equals(user.getPassword())) {
                 model.addAttribute("user", dbUser.toDto());
+
+                List<TableDto> usertables = dbUser.getTables().stream().map(s -> s.toDto()).collect(Collectors.toList());
+                model.addAttribute("usertables", usertables);
+
                 return "logged_user";
             }
             else

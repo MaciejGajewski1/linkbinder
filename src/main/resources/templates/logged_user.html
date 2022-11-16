@@ -31,6 +31,23 @@
 			      		</div>
 			      	</div>
 							<p th:text="'Successfully logged as ' + ${user.username}">
+							<p>Your link tables:</p>
+							<table border = "1">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Open</th>
+										<th>Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="tempUserTables:${usertables}">
+										<td th:text="${tempUserTables.tablename}"/>
+										<td th:text="${tempUserTables.description}"/>
+									</tr>
+								</tbody>
+							</table>
 							<form method="get" action = "/redirectToHomePage">
 								<div class="form-group">
 									<input type="submit" class="form-control btn btn-primary rounded submit px-3" value="Home page">
