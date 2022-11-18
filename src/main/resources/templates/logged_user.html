@@ -1,65 +1,117 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
-  	<title>Link Binder main page</title>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="font-size: 16px;" lang="pl"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<link rel="stylesheet" href="css/style.css">
-
-	</head>
-	<body>
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Link Binder</h2>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-7 col-lg-5">
-					<div class="wrap">
-						<div class="img" style="background-image: url(images/bg-1.png);"></div>
-						<div class="login-wrap p-4 p-md-5">
-			      	<div class="d-flex">
-			      		<div class="w-100">
-			      			<h3 class="mb-4"></h3>
-			      		</div>
-			      	</div>
-							<p th:text="'Successfully logged as ' + ${user.username}">
-							<p>Your link tables:</p>
-							<table border = "1">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Description</th>
-										<th>Open</th>
-										<th>Delete</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="tempUserTables:${usertables}">
-										<td th:text="${tempUserTables.tablename}"/>
-										<td th:text="${tempUserTables.description}"/>
-									</tr>
-								</tbody>
-							</table>
-							<form method="get" action = "/redirectToHomePage">
-								<div class="form-group">
-									<input type="submit" class="form-control btn btn-primary rounded submit px-3" value="Home page">
-								</div>
-							</form>
-		        </div>
-		      </div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	</body>
-</html>
-
+    <meta name="keywords" content="​Link Binder">
+    <meta name="description" content="">
+    <title>Link Binder</title>
+    <link rel="stylesheet" href="css/nicepage.css" media="screen">
+<link rel="stylesheet" href="css/Home-Page.css" media="screen">
+    <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 4.21.12, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    
+    
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": ""
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Home Page">
+    <meta property="og:type" content="website">
+  </head>
+  <body data-home-page="Home-Page.html" data-home-page-title="Home Page" class="u-body u-xl-mode" data-lang="pl"><header class="u-clearfix u-header u-header" id="sec-ccfd"><div class="u-clearfix u-sheet u-sheet-1">
+        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+            <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-df92"></use></svg>
+              <svg class="u-svg-content" version="1.1" id="svg-df92" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled u-nav-1">
+                <li class="u-nav-item">
+                    <form class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" method="get" action = "/redirectToHomePage">
+                        <div>
+                            <input type="submit" value="Home page">
+                        </div>
+                    </form>
+                </li>
+            </ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-inner-container-layout u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a  class="u-button-style u-nav-link" href="index.html">Home Page</a>
+</li></ul>
+              </div>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+        <p class="u-small-text u-text u-text-variant u-text-1" th:text="'logged as: ' + ${user.username}">
+      </div></header>
+    <section class="u-align-center u-clearfix u-custom-color-1 u-section-1" id="carousel_6616">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-text u-text-default u-text-1"> Link Binder</h2>
+        <div class="u-align-center u-container-style u-group u-radius-20 u-shape-round u-white u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h2 class="u-text u-text-body-color u-text-default u-text-2"> Link tables </h2>
+            <div class="u-table u-table-responsive u-table-1">
+                <table border = "1" class="u-table-entity">
+                    <colgroup>
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
+                    </colgroup>
+                    <thead class="u-palette-2-light-2 u-table-header u-table-header-1">
+                    <tr style="height: 45px;">
+                        <th class="u-border-1 u-border-black u-table-cell">Name</th>
+                        <th class="u-border-1 u-border-black u-table-cell">Description</th>
+                        <th class="u-border-1 u-border-black u-table-cell">Open button</th>
+                        <th class="u-border-1 u-border-black u-table-cell">Delete button</th>
+                    </tr>
+                    </thead>
+                    <tbody class="u-table-alt-grey-5 u-table-body">
+                    <tr style="height: 75px;" th:each="tempUserTables:${usertables}">
+                        <td class="u-border-1 u-border-grey-30 u-first-column u-grey-50 u-table-cell u-table-cell-5" th:text="${tempUserTables.tablename}"/>
+                        <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tempUserTables.description}"/>
+                        <td class="u-border-1 u-border-grey-30 u-table-cell">open</td>
+                        <td class="u-border-1 u-border-grey-30 u-table-cell">delete</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-align-center u-clearfix u-section-2" id="sec-9856">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1"></div>
+    </section>
+    <section class="u-clearfix u-section-3" id="sec-53db">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-98f3"><div class="u-clearfix u-sheet u-sheet-1"></div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section>
+  
+</body></html>
