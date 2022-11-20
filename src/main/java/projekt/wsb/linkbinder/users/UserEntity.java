@@ -35,7 +35,7 @@ public class UserEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "userEntity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TableEntity> tables;
 
     public static UserEntity fromDto(UserDto userDto) {

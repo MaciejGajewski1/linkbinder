@@ -75,8 +75,8 @@
                     <tr style="height: 45px;">
                         <th class="u-border-1 u-border-black u-table-cell">Name</th>
                         <th class="u-border-1 u-border-black u-table-cell">Description</th>
-                        <th class="u-border-1 u-border-black u-table-cell">Open Table</th>
-                        <th class="u-border-1 u-border-black u-table-cell">Delete Table</th>
+                        <th class="u-border-1 u-border-black u-table-cell">Open button</th>
+                        <th class="u-border-1 u-border-black u-table-cell">Delete button</th>
                     </tr>
                     </thead>
                     <tbody class="u-table-alt-grey-5 u-table-body">
@@ -93,9 +93,9 @@
                 <br>
                 <h2 class="u-text u-text-body-color u-text-default u-text-2">Create new table</h2>
                 <br>
-                <form action="#" th:action="@{/createTable}" th:object="${table}" class="form-control1">
+                <form action="#" th:action="@{/createTable}" th:object="${table}" class=".form-control1">
                     <div class="u-text u-text-body-color u-text-default u-text-2">
-                        <label>Table name &nbsp</label>
+                        <label class="duplicatedTableName">Table name already exists, please use another one &nbsp</label>
                         <input class="u-border-1 u-border-grey-30 u-table-cell" type="text" th:field="*{tablename}">
                     </div>
                     <br>
