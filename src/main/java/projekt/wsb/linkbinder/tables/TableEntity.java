@@ -21,7 +21,7 @@ public class TableEntity {
     private String description;
 
     @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private UserEntity userEntity;
 
     public static TableEntity fromDto(TableDto tableDto) {

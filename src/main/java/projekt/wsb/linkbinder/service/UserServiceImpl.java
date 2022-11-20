@@ -38,7 +38,7 @@ class UserServiceImpl implements UserService {
             UserEntity dbUser = optionalUser.get();
             if (dbUser.getPassword().equals(user.getPassword())) {
                 model.addAttribute("user", dbUser.toDto());
-
+                model.addAttribute("table", new TableDto());
                 List<TableDto> usertables = dbUser.getTables().stream().map(s -> s.toDto()).collect(Collectors.toList());
                 model.addAttribute("usertables", usertables);
 
