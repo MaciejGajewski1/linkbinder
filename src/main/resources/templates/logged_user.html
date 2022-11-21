@@ -90,25 +90,25 @@
                     </tr>
                     </tbody>
                 </table>
-                <br>
-                <h2 class="u-text u-text-body-color u-text-default u-text-2">Create new table</h2>
-                <br>
-                <form action="#" th:action="@{/createTable}" th:object="${table}" class="form-control1">
-                    <div class="u-text u-text-body-color u-text-default u-text-2">
-                        <label>Table name &nbsp</label>
-                        <input class="u-border-1 u-border-grey-30 u-table-cell" type="text" th:field="*{tablename}">
-                    </div>
-                    <br>
-                    <div class="u-text u-text-body-color u-text-default u-text-2">
-                        <label>Description &nbsp</label>
-                        <input class="u-border-1 u-border-grey-30 u-table-cell" type="text" th:field="*{description}">
-                    </div>
-                    <br>
-                    <div class="u-button-style u-nav-link u-text u-text-body-color u-text-default u-text-2">
-                        <button type="submit" th:name="loggedUsername" th:value="${user.username}">Create table</button>
-                    </div>
-                </form>
             </div>
+              <h2 class="u-text u-text-body-color u-text-default u-text-3"> Create new table </h2>
+              <div class="u-form u-form-1">
+                  <form action="#" th:action="@{/createTable}" th:object="${table}" class="u-clearfix u-form-spacing-15 u-inner-form" style="padding: 15px">
+                      <div class="u-form-group u-form-name u-label-none">
+                          <label class="u-label">Table name</label>
+                          <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" placeholder="Table name" th:field="*{tablename}">
+                      </div>
+                      <br>
+                      <div class="u-form-group u-form-name u-label-none">
+                          <label class="u-label">Description &nbsp</label>
+                          <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" placeholder="Description" th:field="*{description}">
+                      </div>
+                      <br>
+                      <div class="u-form-group u-form-submit u-label-none">
+                          <button type="submit" th:name="loggedUsername" th:value="${user.username}">Create table</button>
+                      </div>
+                  </form>
+              </div>
           </div>
         </div>
       </div>
