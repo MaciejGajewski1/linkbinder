@@ -10,6 +10,7 @@ import projekt.wsb.linkbinder.tables.TableDto;
 import projekt.wsb.linkbinder.users.UserDto;
 import projekt.wsb.linkbinder.users.UserEntity;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,6 +41,12 @@ class UserServiceImpl implements UserService {
                 model.addAttribute("user", dbUser.toDto());
                 model.addAttribute("table", new TableDto());
                 List<TableDto> usertables = dbUser.getTables().stream().map(s -> s.toDto()).collect(Collectors.toList());
+                usertables.sort(new Comparator<TableDto>() {
+                    @Override
+                    public int compare(TableDto o1, TableDto o2) {
+                        return o1.getTablename().compareToIgnoreCase(o2.getTablename());
+                    }
+                });
                 model.addAttribute("usertables", usertables);
 
                 return "logged_user";
