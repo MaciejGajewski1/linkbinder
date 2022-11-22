@@ -1,14 +1,16 @@
 package projekt.wsb.linkbinder.tables;
 
 import lombok.*;
+import projekt.wsb.linkbinder.links.LinkEntity;
 import projekt.wsb.linkbinder.users.UserEntity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "tables")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class TableEntity {
@@ -23,6 +25,16 @@ public class TableEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private UserEntity userEntity;
+
+    @OneToMany(mappedBy = "tableEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<LinkEntity> links;
+
+    public TableEntity(String tablename, String description, UserEntity userEntity) {
+        this.tablename = tablename;
+        this.description = description;
+        this.userEntity = userEntity;
+        links = new HashSet<>();
+    }
 
     public static TableEntity fromDto(TableDto tableDto) {
         return new TableEntity(

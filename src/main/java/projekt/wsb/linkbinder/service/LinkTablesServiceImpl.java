@@ -37,8 +37,8 @@ class LinkTablesServiceImpl implements LinkTablesService {
             return "duplicated_tablename";
         }
         else {
-            TableDto newTableDto = (TableDto) model.getAttribute("table");
-            TableEntity newTableEntity = new TableEntity(tableDto.getTablename(),
+            TableEntity newTableEntity = new TableEntity(
+                    tableDto.getTablename(),
                     tableDto.getDescription(),
                     userRepository.findById(loggedUsername).get());
             tableRepository.save(newTableEntity);
