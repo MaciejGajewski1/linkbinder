@@ -33,7 +33,9 @@ class RegistrationController implements WebMvcConfigurer {
     }
 
     @PostMapping("/login")
-    String logUser(@ModelAttribute("user") UserDto user, Model model) {
+    String logUser(
+            @ModelAttribute("user") UserDto user,
+            Model model) {
         return userService.logUser(user, model);
     }
 
@@ -48,7 +50,10 @@ class RegistrationController implements WebMvcConfigurer {
     }
 
     @PostMapping("/register")
-    String AddValidatedPerson(@Valid @ModelAttribute("user") UserDto user, BindingResult bindingResult, Model model) {
+    String AddValidatedPerson(
+            @Valid @ModelAttribute("user") UserDto user,
+            BindingResult bindingResult,
+            Model model) {
         return userService.validateAndAddPerson(user, bindingResult, model);
     }
 
