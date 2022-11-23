@@ -5,6 +5,8 @@ import projekt.wsb.linkbinder.tables.TableDto;
 
 public interface LinkTablesService {
 
+    String openTable(String currentTable, String loggedUsername, Model model);
+
     String deleteTable(String currentTable, String loggedUsername, Model model);
 
     String createTable(TableDto tableDto, String loggedUsername, Model model);

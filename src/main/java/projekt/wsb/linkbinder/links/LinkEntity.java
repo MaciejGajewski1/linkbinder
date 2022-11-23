@@ -17,16 +17,20 @@ public class LinkEntity {
     @Column(name = "id", nullable = false, updatable = false)
     private String id;
 
-    @Column(name = "targetUrl", nullable = false)
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "targeturl", nullable = false)
     private  String targetUrl;
 
-    @JoinColumn(name = "tablename", nullable = false)
+    @JoinColumn(name = "table_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private TableEntity tableEntity;
 
     public static LinkEntity fromDto(LinkDto linkDto) {
         return new LinkEntity(
                 linkDto.getId(),
+                linkDto.getDescription(),
                 linkDto.getTargetUrl(),
                 linkDto.getTableEntity()
         );
@@ -35,6 +39,7 @@ public class LinkEntity {
     public LinkDto toDto() {
         return new LinkDto(
                 this.id,
+                this.description,
                 this.targetUrl,
                 this.tableEntity
         );

@@ -3,6 +3,7 @@ package projekt.wsb.linkbinder.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import projekt.wsb.linkbinder.links.LinkDto;
 import projekt.wsb.linkbinder.repositories.TableRepository;
 import projekt.wsb.linkbinder.repositories.UserRepository;
 import projekt.wsb.linkbinder.tables.TableDto;
@@ -15,12 +16,21 @@ import java.util.stream.Collectors;
 
 @Service
 class LinkTablesServiceImpl implements LinkTablesService {
-
     @Autowired
     TableRepository tableRepository;
-
     @Autowired
     UserRepository userRepository;
+
+    @Override
+    public String openTable(String currentTable, String loggedUsername, Model model) {
+        UserEntity dbUser =  userRepository.findById(loggedUsername).get();
+        List<LinkDto> linklist = tableRepository.findById(currentTable).get().getLinks().stream().map(s -> s.toDto()).collect(Collectors.toList());
+        model.addAttribute("user", dbUser.toDto());
+        model.addAttribute("linklist", linklist);
+        model.addAttribute("tablename", currentTable);
+        model.addAttribute("link", new LinkDto());
+        return "opened_table";
+    }
 
     @Override
     public String deleteTable(String currentTable, String loggedUsername, Model model) {
@@ -32,11 +42,13 @@ class LinkTablesServiceImpl implements LinkTablesService {
 
     @Override
     public String createTable(TableDto tableDto, String loggedUsername, Model model) {
-        if (tableRepository.existsById(tableDto.getTablename())) {
+        if (tableDto.getTablename().isBlank()) {
+            addModelAttributes(loggedUsername, model);
+            return "blank_tablename";
+        } else if (tableRepository.existsById(tableDto.getTablename())) {
             addModelAttributes(loggedUsername, model);
             return "duplicated_tablename";
-        }
-        else {
+        } else {
             TableEntity newTableEntity = new TableEntity(
                     tableDto.getTablename(),
                     tableDto.getDescription(),
