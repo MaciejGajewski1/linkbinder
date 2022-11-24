@@ -1188,6 +1188,30 @@ a {
   align-items: center;
   flex-grow: 1;
 }
+
+.parent {
+  margin-left: -25px;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.parent1 {
+  margin-left: -8px;
+  text-align: left;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.child {
+  display: inline-block;
+}
+
+.space_lg
+{
+width:646px;
+}
+
 .u-input {
   display: block;
   width: 100%;

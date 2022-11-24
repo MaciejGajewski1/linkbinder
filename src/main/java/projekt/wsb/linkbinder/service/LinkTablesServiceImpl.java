@@ -25,6 +25,12 @@ class LinkTablesServiceImpl implements LinkTablesService {
     public String openTable(String currentTable, String loggedUsername, Model model) {
         UserEntity dbUser =  userRepository.findById(loggedUsername).get();
         List<LinkDto> linklist = tableRepository.findById(currentTable).get().getLinks().stream().map(s -> s.toDto()).collect(Collectors.toList());
+        linklist.sort(new Comparator<LinkDto>() {
+            @Override
+            public int compare(LinkDto o1, LinkDto o2) {
+                return o1.getId().compareToIgnoreCase(o2.getId());
+            }
+        });
         model.addAttribute("user", dbUser.toDto());
         model.addAttribute("linklist", linklist);
         model.addAttribute("tablename", currentTable);

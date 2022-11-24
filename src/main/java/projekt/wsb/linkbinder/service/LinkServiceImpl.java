@@ -70,11 +70,22 @@ class LinkServiceImpl implements LinkService {
         return "logged_user";
     }
 
+    @Override
+    public String getLink(final String id) {
+        final LinkEntity linkEntity = linkRepository.findById(id).get();
+        return linkEntity.getTargetUrl();
+    }
+
     private void addModelAttributes(String tablename, Model model) {
 
         UserEntity dbUser = tableRepository.findById(tablename).get().getUserEntity();
         List<LinkDto> linklist = tableRepository.findById(tablename).get().getLinks().stream().map(s -> s.toDto()).collect(Collectors.toList());
-
+        linklist.sort(new Comparator<LinkDto>() {
+            @Override
+            public int compare(LinkDto o1, LinkDto o2) {
+                return o1.getId().compareToIgnoreCase(o2.getId());
+            }
+        });
         model.addAttribute("user", dbUser.toDto());
         model.addAttribute("linklist", linklist);
         model.addAttribute("tablename", tablename);
