@@ -62,7 +62,22 @@
         <h2 class="u-text u-text-default u-text-1"> Link Binder</h2>
         <div class="u-align-center u-container-style u-group u-radius-20 u-shape-round u-white u-group-1">
           <div class="u-container-layout u-container-layout-1">
-            <h2 class="u-text u-text-body-color u-text-default u-text-2" th:text="${tablename}"/>
+                  <div class="parent">
+                      <form action="#" th:action="@{/searchForLink}" th:object="${link}" method="get" style="padding: 15px">
+                          <div class="child">
+                              <h2 class="u-text u-text-body-color u-text-2" th:text="'Table: ' + ${tablename}"></h2>
+                          </div>
+                          <div class="child space_lg">
+                              <p>&nbsp;</p>
+                          </div>
+                          <div class="u-form-group u-form-name child">
+                              <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{id}" placeholder="Search for link id">
+                          </div>
+                          <div class="u-form-group u-form-submit child">
+                              <button type="submit" th:name="tablename" th:value="${tablename}">Search</button>
+                          </div>
+                      </form>
+                  </div>
             <div class="u-table u-table-responsive u-table-1">
                 <table border = "1" class="u-table-entity">
                     <colgroup>
@@ -83,7 +98,9 @@
                     <tr style="height: 75px;" th:each="tempLinkList:${linklist}">
                         <td class="u-border-1 u-border-grey-30 u-first-column u-grey-50 u-table-cell u-table-cell-5" th:text="${tempLinkList.id}"/>
                         <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tempLinkList.description}"/>
-                        <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tempLinkList.shortenedUrl}"/>
+                        <td class="u-border-1 u-border-grey-30 u-table-cell">
+                            <a th:href="${tempLinkList.shortenedUrl}" th:text="${tempLinkList.shortenedUrl}"/>
+                        </td>
                         <td class="u-border-1 u-border-grey-30 u-table-cell">
                             <a th:href="@{/deleteLink(currentLink=${tempLinkList.id}, loggedUsername=${user.username})}">delete</a>
                         </td>
@@ -91,7 +108,9 @@
                     </tbody>
                 </table>
             </div>
-              <h2 class="u-text u-text-body-color u-text-default u-text-3">Add new link</h2>
+              <div class="parent1">
+                  <h2 class="u-text u-text-body-color u-text-default u-text-3">Add new link</h2>
+              </div>
               <div class="u-form u-form-1">
                   <form action="#" th:action="@{/addLink}" th:object="${link}" class="u-clearfix u-form-spacing-15 u-inner-form" style="padding: 15px">
                       <div class="u-form-group u-form-name">
