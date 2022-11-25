@@ -3,6 +3,7 @@ package projekt.wsb.linkbinder.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import projekt.wsb.linkbinder.links.KeyWordDto;
 import projekt.wsb.linkbinder.links.LinkDto;
 import projekt.wsb.linkbinder.repositories.TableRepository;
 import projekt.wsb.linkbinder.repositories.UserRepository;
@@ -35,6 +36,7 @@ class LinkTablesServiceImpl implements LinkTablesService {
         model.addAttribute("linklist", linklist);
         model.addAttribute("tablename", currentTable);
         model.addAttribute("link", new LinkDto());
+        model.addAttribute("keyWord", new KeyWordDto());
         return "opened_table";
     }
 
