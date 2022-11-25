@@ -15,6 +15,7 @@ import projekt.wsb.linkbinder.users.UserEntity;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,11 +37,15 @@ class LinkServiceImpl implements LinkService {
     @Override
     public String addLink(LinkDto linkDto, String tablename, Model model) {
 
+        linkDto.setId(linkDto.getId().toLowerCase());
+
         if (linkDto.getId().isBlank()) {
             addModelAttributes(tablename, model);
             return "blank_linkid";
-        }
-        else if (linkRepository.existsById(linkDto.getId())) {
+        } else if (linkDto.getTargetUrl().isBlank()) {
+            addModelAttributes(tablename, model);
+            return "blank_targeturl";
+        } else if (linkRepository.existsById(linkDto.getId())) {
             addModelAttributes(tablename, model);
             return "duplicated_linkid";
         }
@@ -80,7 +85,7 @@ class LinkServiceImpl implements LinkService {
 
     @Override
     public String searchForLink(String tablename, KeyWordDto keyWordDto, Model model) {
-        String stringToMatch = keyWordDto.getKeyWord();
+        String stringToMatch = keyWordDto.getKeyWord().toLowerCase();
         if (stringToMatch.isBlank()) {
             addModelAttributes(tablename, model);
             return "blank_search";
@@ -92,6 +97,12 @@ class LinkServiceImpl implements LinkService {
             if (!currentLinkId.contains(stringToMatch))
                 iterator.remove();
         }
+        linklist.sort(new Comparator<LinkDto>() {
+            @Override
+            public int compare(LinkDto o1, LinkDto o2) {
+                return o1.getId().compareToIgnoreCase(o2.getId());
+            }
+        });
         model.addAttribute("user", tableRepository.findById(tablename).get().getUserEntity().toDto());
         model.addAttribute("linklist", linklist);
         model.addAttribute("tablename", tablename);
