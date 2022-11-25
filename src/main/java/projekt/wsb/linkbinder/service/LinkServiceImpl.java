@@ -3,6 +3,7 @@ package projekt.wsb.linkbinder.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import projekt.wsb.linkbinder.links.KeyWordDto;
 import projekt.wsb.linkbinder.links.LinkDto;
 import projekt.wsb.linkbinder.links.LinkEntity;
 import projekt.wsb.linkbinder.repositories.LinkRepository;
@@ -13,6 +14,7 @@ import projekt.wsb.linkbinder.users.UserEntity;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,6 +78,33 @@ class LinkServiceImpl implements LinkService {
         return linkEntity.getTargetUrl();
     }
 
+    @Override
+    public String searchForLink(String tablename, KeyWordDto keyWordDto, Model model) {
+        String stringToMatch = keyWordDto.getKeyWord();
+        if (stringToMatch.isBlank()) {
+            addModelAttributes(tablename, model);
+            return "blank_search";
+        }
+        List<LinkDto> linklist = tableRepository.findById(tablename).get().getLinks().stream().map(s -> s.toDto()).collect(Collectors.toList());
+        ListIterator<LinkDto> iterator = linklist.listIterator();
+        while(iterator.hasNext()) {
+            String currentLinkId = iterator.next().getId();
+            if (!currentLinkId.contains(stringToMatch))
+                iterator.remove();
+        }
+        model.addAttribute("user", tableRepository.findById(tablename).get().getUserEntity().toDto());
+        model.addAttribute("linklist", linklist);
+        model.addAttribute("tablename", tablename);
+        model.addAttribute("keyWord", keyWordDto);
+        return "search_result";
+    }
+
+    @Override
+    public String redirectToOpenedTable(String tablename, Model model) {
+        addModelAttributes(tablename, model);
+        return "opened_table";
+    }
+
     private void addModelAttributes(String tablename, Model model) {
 
         UserEntity dbUser = tableRepository.findById(tablename).get().getUserEntity();
@@ -90,5 +119,6 @@ class LinkServiceImpl implements LinkService {
         model.addAttribute("linklist", linklist);
         model.addAttribute("tablename", tablename);
         model.addAttribute("link", new LinkDto());
+        model.addAttribute("keyWord", new KeyWordDto());
     }
 }

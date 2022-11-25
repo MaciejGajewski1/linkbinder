@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 @ToString
 public final class LinkDto {
 
-    @NotBlank(message = "Empty field, please fill in Id")
     private String id;
 
     private String description;
@@ -30,7 +29,7 @@ public final class LinkDto {
         this.tableEntity = tableEntity;
         shortenedUrl = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/{id}")
+                .path("/s/{id}")
                 .buildAndExpand(this.id)
                 .toUriString();
     }

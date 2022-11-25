@@ -64,8 +64,11 @@
             <div class="u-container-layout u-container-layout-1">
                 <div class="parent">
                     <form action="#" th:action="@{/searchForLink}" th:object="${keyWord}" method="get" style="padding: 15px">
-                        <div class="child space_lg">
+                        <div class="child space_lg2">
                             <p>&nbsp;</p>
+                        </div>
+                        <div class="child">
+                            <p class="u-text-custom-color-2">Empty search field, please fill in</p>
                         </div>
                         <div class="u-form-group u-form-name child">
                             <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{keyWord}" placeholder="Search for link id">
@@ -138,7 +141,6 @@
                         </div>
                     </form>
                 </div>
-                <p class="u-large-text u-text u-text-custom-color-2 u-text-variant u-text-4">Link id already exists, please use another one</p>
             </div>
         </div>
     </div>

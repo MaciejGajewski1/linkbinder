@@ -63,20 +63,20 @@
         <div class="u-align-center u-container-style u-group u-radius-20 u-shape-round u-white u-group-1">
             <div class="u-container-layout u-container-layout-1">
                 <div class="parent">
-                    <form action="#" th:action="@{/searchForLink}" th:object="${link}" method="get" style="padding: 15px">
-                        <div class="child">
-                            <h2 class="u-text u-text-body-color u-text-2" th:text="'Table: ' + ${tablename}"></h2>
-                        </div>
+                    <form action="#" th:action="@{/searchForLink}" th:object="${keyWord}" method="get" style="padding: 15px">
                         <div class="child space_lg">
                             <p>&nbsp;</p>
                         </div>
                         <div class="u-form-group u-form-name child">
-                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{id}" placeholder="Search for link id">
+                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{keyWord}" placeholder="Search for link id">
                         </div>
                         <div class="u-form-group u-form-submit child">
                             <button type="submit" th:name="tablename" th:value="${tablename}">Search</button>
                         </div>
                     </form>
+                </div>
+                <div class="parent1">
+                    <h2 class="u-text u-text-body-color u-text-default u-text-3" th:text="'Table: ' + ${tablename}"/>
                 </div>
                 <div class="u-table u-table-responsive u-table-1">
                     <table border = "1" class="u-table-entity">

@@ -1,9 +1,11 @@
 package projekt.wsb.linkbinder.controllers;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import projekt.wsb.linkbinder.links.KeyWordDto;
 import projekt.wsb.linkbinder.links.LinkDto;
 import projekt.wsb.linkbinder.service.LinkService;
 
@@ -38,7 +40,7 @@ class LinksController {
         return linkService.redirectToLinkTables(tablename, model);
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/s/{id}")
     public void redirectLink(
             @PathVariable String id,
             HttpServletResponse httpServletResponse) throws IOException {
@@ -49,7 +51,15 @@ class LinksController {
     @GetMapping("/searchForLink")
     String showMatchedLinks(
             @RequestParam(value = "tablename") String tablename,
+            @ModelAttribute("keyWord") KeyWordDto keyWordDto,
             Model model) {
-        return "index";
+        return linkService.searchForLink(tablename, keyWordDto, model);
+    }
+
+    @GetMapping("/backToOpenedTable")
+    String redirectToOpenedTable(
+            @RequestParam(value = "tablename") String tablename,
+            Model model) {
+        return linkService.redirectToOpenedTable(tablename, model);
     }
 }
