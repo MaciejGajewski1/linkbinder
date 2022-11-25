@@ -33,5 +33,4 @@ public final class LinkDto {
                 .buildAndExpand(this.id)
                 .toUriString();
     }
-
 }

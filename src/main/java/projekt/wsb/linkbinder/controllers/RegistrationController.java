@@ -25,6 +25,7 @@ class RegistrationController implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/register_approve").setViewName("register_approve");
         registry.addViewController("/register_dissapprove").setViewName("register_dissapprove");
+        registry.addViewController("/password_dissapprove").setViewName("password_dissapprove");
     }
 
     @GetMapping("/")

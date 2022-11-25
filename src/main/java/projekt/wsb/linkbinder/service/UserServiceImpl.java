@@ -10,6 +10,7 @@ import projekt.wsb.linkbinder.tables.TableDto;
 import projekt.wsb.linkbinder.users.UserDto;
 import projekt.wsb.linkbinder.users.UserEntity;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -74,6 +75,9 @@ class UserServiceImpl implements UserService {
 
         UserDto newUser = (UserDto) model.getAttribute("user");
 
+        if(!validatePassword(newUser.getPassword()))
+            return "redirect:/password_dissapprove";
+
         if(userRepository.findById(newUser.getUsername()).isPresent()) {
             return "redirect:/register_dissapprove";
         }
@@ -87,5 +91,19 @@ class UserServiceImpl implements UserService {
     public String returnToHomePage(Model model) {
         model.addAttribute("user", new UserDto());
         return "index";
+    }
+
+    private boolean validatePassword(String password) {
+        List<Character> numbers = Arrays.asList('0','1','2','3','4','5','6','7','8','9');
+        List<Character> specials = Arrays.asList('!','@','#','$','%','^','&','*','?');
+        boolean numFlag = false;
+        boolean specFlag = false;
+        for(char c : password.toCharArray()) {
+            if (numbers.contains(c))
+                numFlag = true;
+            if (specials.contains(c))
+                specFlag = true;
+        }
+        return numFlag & specFlag;
     }
 }
