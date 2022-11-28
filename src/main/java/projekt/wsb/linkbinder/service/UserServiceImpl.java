@@ -95,7 +95,7 @@ class UserServiceImpl implements UserService {
 
     private boolean validatePassword(String password) {
         List<Character> numbers = Arrays.asList('0','1','2','3','4','5','6','7','8','9');
-        List<Character> specials = Arrays.asList('!','@','#','$','%','^','&','*','?');
+        List<Character> specials = Arrays.asList('!','@','#','$','%','^','&','*','?','.');
         boolean numFlag = false;
         boolean specFlag = false;
         for(char c : password.toCharArray()) {

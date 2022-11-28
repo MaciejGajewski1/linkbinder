@@ -115,7 +115,7 @@
                     <form action="#" th:action="@{/addLink}" th:object="${link}" class="u-clearfix u-form-spacing-15 u-inner-form" style="padding: 15px">
                         <div class="u-form-group u-form-name">
                             <label class="u-label">Id</label>
-                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{id}">
+                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{id}" th:value="${link.id}">
                         </div>
                         <br>
                         <div class="u-form-group u-form-name">
@@ -125,7 +125,7 @@
                         <br>
                         <div class="u-form-group u-form-name">
                             <label class="u-label">Target URL &nbsp</label>
-                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{targetUrl}" th:value="${link.targetUrl}">
+                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{targetUrl}">
                         </div>
                         <br>
                         <div class="u-form-group u-form-submit">
@@ -138,7 +138,7 @@
                         </div>
                     </form>
                 </div>
-                <p class="u-large-text u-text u-text-custom-color-2 u-text-variant u-text-4">Empty id field, please fill in</p>
+                <p class="u-large-text u-text u-text-custom-color-2 u-text-variant u-text-4">URL does not work, please fill in valid URL address</p>
             </div>
         </div>
     </div>

@@ -115,12 +115,12 @@
                     <form action="#" th:action="@{/addLink}" th:object="${link}" class="u-clearfix u-form-spacing-15 u-inner-form" style="padding: 15px">
                         <div class="u-form-group u-form-name">
                             <label class="u-label">Id</label>
-                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{id}">
+                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{id}" th:value="${link.id}">
                         </div>
                         <br>
                         <div class="u-form-group u-form-name">
                             <label class="u-label">Description &nbsp</label>
-                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{description}">
+                            <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{description}" th:value="${link.description}">
                         </div>
                         <br>
                         <div class="u-form-group u-form-name">
