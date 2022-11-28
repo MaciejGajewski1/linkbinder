@@ -42,10 +42,16 @@ class LinkTablesServiceImpl implements LinkTablesService {
 
     @Override
     public String deleteTable(String currentTable, String loggedUsername, Model model) {
-        tableRepository.deleteById(currentTable);
-        addModelAttributes(loggedUsername, model);
-        model.addAttribute("table", new TableDto());
-        return "logged_user";
+        if (tableRepository.existsById(currentTable)) {
+            tableRepository.deleteById(currentTable);
+            addModelAttributes(loggedUsername, model);
+            model.addAttribute("table", new TableDto());
+            return "logged_user";
+        } else {
+            addModelAttributes(loggedUsername, model);
+            model.addAttribute("table", new TableDto());
+            return "logged_user";
+        }
     }
 
     @Override
