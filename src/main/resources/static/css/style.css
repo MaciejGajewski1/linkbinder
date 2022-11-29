@@ -1645,7 +1645,7 @@ pre {
       -ms-transform: translateY(-50%);
       transform: translateY(-50%);
       color: rgba(0, 0, 0, 0.3); }
-        
+
 .form-control-placeholder1 {
   position: absolute;
   top: 2px;
@@ -1654,7 +1654,7 @@ pre {
   -o-transition: all 400ms;
   transition: all 400ms;
   opacity: .6; }
-        
+
 .form-control1:focus + .form-control-placeholder1,
 .form-control1:valid + .form-control-placeholder1 {
   -webkit-transform: translate3d(0, -120%, 0);
