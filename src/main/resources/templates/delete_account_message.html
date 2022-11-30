@@ -11,10 +11,10 @@
     <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.21.12, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-
-
-
-
+    
+    
+    
+    
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
@@ -56,28 +56,20 @@
           </div>
         </nav>
       <p align="right" class="u-small-text u-text u-text-variant u-text-bb" th:text="'logged as: ' + ${user.username}"></p>
+      <p align="right" class="u-small-text u-text-bb parent2">
+        <span class="u-small-text child">Are you sure? &nbsp;</span>
+        <a class="u-small-text child" th:href="@{/deleteUserApprove(loggedUsername=${user.username})}">yes</a>
+        <span class="u-small-text child">&nbsp; / &nbsp;</span>
+        <a class="u-small-text child" th:href="@{/deleteUserDissapprove(loggedUsername=${user.username})}">no</a>
+      </p>
+  </div>
       </div></header>
     <section class="u-align-center u-clearfix u-custom-color-1 u-section-1" id="carousel_6616">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-text u-text-default u-text-1"> Link Binder</h2>
         <div class="u-align-center u-container-style u-group u-radius-20 u-shape-round u-white u-group-1">
           <div class="u-container-layout u-container-layout-1">
-                  <div class="parent">
-                      <form action="#" th:action="@{/searchForLink}" th:object="${keyWord}" method="get" style="padding: 15px">
-                          <div class="child space_lg">
-                              <p>&nbsp;</p>
-                          </div>
-                          <div class="u-form-group u-form-name child">
-                              <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{keyWord}" placeholder="Search for link id">
-                          </div>
-                          <div class="u-form-group u-form-submit child">
-                              <button type="submit" th:name="tablename" th:value="${tablename}">Search</button>
-                          </div>
-                      </form>
-                  </div>
-              <div class="parent1">
-                  <h2 class="u-text u-text-body-color u-text-default u-text-3" th:text="'Table: ' + ${tablename}"/>
-              </div>
+            <h2 class="u-text u-text-body-color u-text-default u-text-2"> Link tables </h2>
             <div class="u-table u-table-responsive u-table-1">
                 <table border = "1" class="u-table-entity">
                     <colgroup>
@@ -88,34 +80,34 @@
                     </colgroup>
                     <thead class="u-palette-2-light-2 u-table-header u-table-header-1">
                     <tr style="height: 45px;">
-                        <th class="u-border-1 u-border-black u-table-cell">Id</th>
+                        <th class="u-border-1 u-border-black u-table-cell">Name</th>
                         <th class="u-border-1 u-border-black u-table-cell">Description</th>
-                        <th class="u-border-1 u-border-black u-table-cell">Shortened link</th>
-                        <th class="u-border-1 u-border-black u-table-cell">Delete link</th>
+                        <th class="u-border-1 u-border-black u-table-cell">Open Table</th>
+                        <th class="u-border-1 u-border-black u-table-cell">Delete Table</th>
                     </tr>
                     </thead>
                     <tbody class="u-table-alt-grey-5 u-table-body">
-                    <tr style="height: 75px;" th:each="tempLinkList:${linklist}">
-                        <td class="u-border-1 u-border-grey-30 u-first-column u-grey-50 u-table-cell u-table-cell-5" th:text="${tempLinkList.id}"/>
-                        <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tempLinkList.description}"/>
+                    <tr style="height: 75px;" th:each="tempUserTables:${usertables}">
+                        <td class="u-border-1 u-border-grey-30 u-first-column u-grey-50 u-table-cell u-table-cell-5" th:text="${tempUserTables.tablename}"/>
+                        <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tempUserTables.description}"/>
                         <td class="u-border-1 u-border-grey-30 u-table-cell">
-                            <a th:href="${tempLinkList.shortenedUrl}" th:text="${tempLinkList.shortenedUrl}"/>
+                            <a th:href="@{/openTable(currentTable=${tempUserTables.tablename}, loggedUsername=${user.username})}">open</a>
                         </td>
                         <td class="u-border-1 u-border-grey-30 u-table-cell">
-                            <a th:href="@{/deleteLink(currentLink=${tempLinkList.id}, loggedUsername=${user.username})}">delete</a>
+                            <a th:href="@{/deleteTable(currentTable=${tempUserTables.tablename}, loggedUsername=${user.username})}">delete</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
               <div class="parent1">
-                  <h2 class="u-text u-text-body-color u-text-default u-text-3">Add new link</h2>
+                  <h2 class="u-text u-text-body-color u-text-default u-text-3">Create new table</h2>
               </div>
               <div class="u-form u-form-1">
-                  <form action="#" th:action="@{/addLink}" th:object="${link}" class="u-clearfix u-form-spacing-15 u-inner-form" style="padding: 15px">
+                  <form action="#" th:action="@{/createTable}" th:object="${table}" class="u-clearfix u-form-spacing-15 u-inner-form" style="padding: 15px">
                       <div class="u-form-group u-form-name">
-                          <label class="u-label">Id</label>
-                          <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{id}">
+                          <label class="u-label">Table name</label>
+                          <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{tablename}">
                       </div>
                       <br>
                       <div class="u-form-group u-form-name">
@@ -123,18 +115,8 @@
                           <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{description}">
                       </div>
                       <br>
-                      <div class="u-form-group u-form-name">
-                          <label class="u-label">Target URL &nbsp</label>
-                          <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle" type="text" th:field="*{targetUrl}">
-                      </div>
-                      <br>
                       <div class="u-form-group u-form-submit">
-                          <button type="submit" th:name="tablename" th:value="${tablename}">Add Link</button>
-                      </div>
-                  </form>
-                  <form action = "/backToLinkTables" class="u-clearfix u-form-spacing-15 u-inner-form" style="padding: 15px">
-                      <div class="u-form-group u-form-submit u-label-none">
-                          <button type="submit" th:name="tablename" th:value="${tablename}">Back to link tables</button>
+                          <button type="submit" th:name="loggedUsername" th:value="${user.username}">Create table</button>
                       </div>
                   </form>
               </div>
