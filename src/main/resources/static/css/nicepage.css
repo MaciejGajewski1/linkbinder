@@ -1203,8 +1203,14 @@ a {
   margin-bottom: 0px;
 }
 
+.parent2 {
+
+}
+
 .child {
   display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
 .space_lg
@@ -38630,6 +38636,18 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-nav-2 {
   font-size: 1.25rem;
+}
+
+.u-text-delaccount {
+  margin: -29px 0 51px 965px;
+}
+
+.u-text-bb {
+  margin-right: 40px;
+}
+
+.u-mytext {
+  margin-right: 20px;
 }
 
 .u-header .u-text-1 {

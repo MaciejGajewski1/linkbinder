@@ -39,17 +39,7 @@ class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             UserEntity dbUser = optionalUser.get();
             if (dbUser.getPassword().equals(user.getPassword())) {
-                model.addAttribute("user", dbUser.toDto());
-                model.addAttribute("table", new TableDto());
-                List<TableDto> usertables = dbUser.getTables().stream().map(s -> s.toDto()).collect(Collectors.toList());
-                usertables.sort(new Comparator<TableDto>() {
-                    @Override
-                    public int compare(TableDto o1, TableDto o2) {
-                        return o1.getTablename().compareToIgnoreCase(o2.getTablename());
-                    }
-                });
-                model.addAttribute("usertables", usertables);
-
+                addModelAttributes(user.getUsername(), model);
                 return "logged_user";
             }
             else
@@ -91,6 +81,38 @@ class UserServiceImpl implements UserService {
     public String returnToHomePage(Model model) {
         model.addAttribute("user", new UserDto());
         return "index";
+    }
+
+    @Override
+    public String deleteUser(String username, Model model) {
+        addModelAttributes(username, model);
+        return "delete_account_message";
+    }
+
+    @Override
+    public String deleteUserDissapprove(String username, Model model) {
+        addModelAttributes(username, model);
+        return "logged_user";
+    }
+
+    @Override
+    public String deleteUserApprove(String username, Model model) {
+        userRepository.deleteById(username);
+        return initModel(model);
+    }
+
+    private void addModelAttributes(String loggedUsername, Model model) {
+        UserEntity dbUser =  userRepository.findById(loggedUsername).get();
+        List<TableDto> usertables = dbUser.getTables().stream().map(s -> s.toDto()).collect(Collectors.toList());
+        usertables.sort(new Comparator<TableDto>() {
+            @Override
+            public int compare(TableDto o1, TableDto o2) {
+                return o1.getTablename().compareToIgnoreCase(o2.getTablename());
+            }
+        });
+        model.addAttribute("usertables", usertables);
+        model.addAttribute("user", dbUser.toDto());
+        model.addAttribute("table", new TableDto());
     }
 
     private boolean validatePassword(String password) {

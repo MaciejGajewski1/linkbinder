@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import projekt.wsb.linkbinder.service.UserService;
@@ -61,6 +59,27 @@ class RegistrationController implements WebMvcConfigurer {
     @GetMapping("/redirectToHomePage")
     String showHomePage(Model model) {
         return userService.returnToHomePage(model);
+    }
+
+    @RequestMapping(value = "/deleteUser")
+    String deleteUser(
+            @RequestParam(value = "loggedUsername") String loggedUsername,
+            Model model) {
+        return userService.deleteUser(loggedUsername, model);
+    }
+
+    @RequestMapping(value = "/deleteUserApprove")
+    String deleteUserApprove(
+            @RequestParam(value = "loggedUsername") String loggedUsername,
+            Model model) {
+        return userService.deleteUserApprove(loggedUsername, model);
+    }
+
+    @RequestMapping(value = "/deleteUserDissapprove")
+    String deleteUserDissapprove(
+            @RequestParam(value = "loggedUsername") String loggedUsername,
+            Model model) {
+        return userService.deleteUserDissapprove(loggedUsername, model);
     }
 
 }
